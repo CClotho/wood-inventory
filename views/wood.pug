@@ -1,5 +1,15 @@
 extends layout
 
 block content
-    
+    h2= exist ? exist : ''
+    h1= Wood.name
+    p= Wood.description
+    span(style="display:block") Type: #{Wood.type}
+    span(style="display:block") Texture: #{Wood.texture}
+    span(style="display:block") Durability: #{Wood.durability.class}
+    span(style="display:block") Color: #{Wood.colors[0].color}
+    span(style="display:block") Quantity: #{Wood.quantity}
+    span(style="display:block") Price: #{Wood.price} 
 
+    br
+    a(href="/") Back

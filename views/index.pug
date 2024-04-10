@@ -3,3 +3,54 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+    
+  div.container
+    <form  action="woods/category/softwood" method="get">
+      button.btn(type="submit") Softwoods 
+    </form>
+
+    <form action="woods/category/hardwood" method="get">
+      button.btn(type="submit") Hardwoods 
+    </form>
+    
+    <form action="woods/category/engineered" method="get">
+      button.btn(type="submit") Engineered
+    </form>
+  </div>
+  
+    br
+    
+
+    table(style='width:100%', border='1')
+        tr
+            th Wood
+            th Type
+            th Description
+            th Texture
+            th Color
+            th Durability
+            th Quantity
+            th Price
+            th Edit
+            th Delete
+        tbody
+        each wood in Woods
+          tr
+            td 
+              a(href=`${wood.url}`) #{wood.name}
+            td #{wood.type}
+            td #{wood.description}
+            td #{wood.texture}
+            td= wood.durability.class ?wood.durability.class : '' 
+            td= wood.colors[0].color ? wood.colors[0].color : '' 
+            td #{wood.quantity}
+            td ₱#{wood.price}
+            td
+              a(href=`${wood.url}`) Edit
+            td
+              a(href=`${wood.url}`) Delete
+    br
+    a(href="/add/wood") Add New Wood
+  script.
+    document.addEventListener('keydown', event => {console.log("Bleep!")})

@@ -1,0 +1,58 @@
+extends layout
+
+block content
+    <form action="/add/wood" method="POST">
+        
+        div.form_sub_container
+            div.form_division
+                label(for="name") Name:
+                input(type="text" placeholder="Oak" name="name" id="name") 
+                span= exist ? exist : ''
+
+            div.form_division
+                label(for="type") Type:
+                input(type="text" placeholder="softwood" name="type" id="type") 
+        
+            div.form_division
+                label(for="description") Description:
+                input(type="text" placeholder="Sturdy and durable" name="description" id="description") 
+            
+            div.form_division
+                label(for='colors') Colors:
+                select(name='colors')
+                    each color in Colors
+                        option(selected= color._id === colors) #{color.color}
+            
+            div.form_division
+                label(for='durability') Durability:
+                select(name='durability')
+                    each durability in Classes
+                        option(selected= durability._id === durability) #{durability.name}
+
+
+            div.form_division
+                label(for="texture") Texture:
+                input(type="text" placeholder="rough" name="texture" id="texture")
+            
+            div.form_division
+                label(for="quantity") Quantity:
+                input(type="number" placeholder="30")
+
+            div.form_division
+                label(for="price") Price: 
+                input(type="number" placeholder="₱ 54.55")
+            
+            div.form_division
+                label(for="variety") Variety: 
+                input(type="text" placeholder="West Oak")
+            
+            br
+            
+            div.btn_container
+                button.btn Add New Wood
+                span
+                    a(href="/" class="cancel") Cancel
+           
+            
+
+    </form>
