@@ -42,14 +42,14 @@ block content
             td #{wood.type}
             td #{wood.description}
             td #{wood.texture}
-            td= wood.durability.class ?wood.durability.class : '' 
-            td= wood.colors[0].color ? wood.colors[0].color : '' 
+            td #{wood.colors[0] ? wood.colors[0].color: ''}
+            td #{wood.durability ? wood.durability.class : ''} 
             td #{wood.quantity}
-            td ₱#{wood.price}
+            td ₱#{Number.isInteger(wood.price) ? `${wood.price}.00` : wood.price}
             td
-              a(href=`${wood.url}`) Edit
+              a(href=`${wood.id_url}`) Edit
             td
-              a(href=`${wood.url}`) Delete
+              a(href=`${wood.id_url}`) Delete
     br
     a(href="/add/wood") Add New Wood
   script.

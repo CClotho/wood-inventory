@@ -1,3 +1,59 @@
 extends layout
 
 block content
+    <form method="POST">
+        
+        div.form_sub_container
+            div.form_division
+                label(for="name") Name: 
+                input(type="text" placeholder="Oak" name="name" id="name" value=Wood.name) 
+                span= exist ? exist : ''
+
+            div.form_division
+                label(for="type") Type:
+                input(type="text" placeholder="softwood" name="type" id="type" value=Wood.type) 
+        
+            div.form_division
+                label(for="description") Description:
+                input(type="text" placeholder="Sturdy and durable" name="description" id="description" value=Wood.description) 
+            
+            div.form_division
+                span Select colors that apply
+                each color in Colors
+                    div
+                        input(type="checkbox" name="colors" checked=(Wood.colors[0] ? Wood.colors[0]._id.toString() === color._id.toString() : false) value=color._id id=color.color)
+                        label(for=colors) #{color.color}
+              
+            div.form_division
+                label(for='durability') Durability:
+                select(name='durability')
+                    each durability in Classes
+                        option(value=durability._id selected= (Wood.durability && Wood.durability.toString() === durability._id.toString())) #{durability.name}
+
+
+            div.form_division
+                label(for="texture") Texture:
+                input(type="text" placeholder="rough" name="texture" id="texture" value=Wood.texture)
+            
+            div.form_division
+                label(for="quantity") Quantity:
+                input(type="number" placeholder="30" name="quantity" value=Wood.quantity)
+
+            div.form_division
+                label(for="price") Price: 
+                input(type="number" placeholder="₱ 54.55" name="price" value=Wood.price min="0.1" step=".01")
+            
+            div.form_division
+                label(for="variety") Variety: 
+                input(type="text" placeholder="West Oak" name="variety" value=Wood.variety ? Wood.variety : '')
+            
+            br
+            
+            div.btn_container
+                button(type="submit" class="btn") Edit
+                span
+                    a(href="/" class="cancel") Cancel
+           
+            
+
+    </form>

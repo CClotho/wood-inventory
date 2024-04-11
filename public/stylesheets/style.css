@@ -19,8 +19,13 @@ p {
   background-color: seagreen;
   padding: 4px;
   cursor: pointer;
+  
  
- 
+}
+
+.btn a {
+  font-family: fantasy;
+  color: black;
 }
 
 span {
@@ -63,6 +68,11 @@ table {
   
 }
 
+.form_division div {
+  border: 2px solid black;
+  display: flex;
+}
+
 .form_sub_container {
   flex-basis: 400px;
   min-width: 350px;
@@ -78,7 +88,7 @@ form {
   justify-content: center;
 }
 
-.cancel {
+.cancel, .edit {
   text-decoration: none;
 }
 
@@ -86,4 +96,11 @@ form {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

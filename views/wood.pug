@@ -6,10 +6,11 @@ block content
     p= Wood.description
     span(style="display:block") Type: #{Wood.type}
     span(style="display:block") Texture: #{Wood.texture}
-    span(style="display:block") Durability: #{Wood.durability.class}
-    span(style="display:block") Color: #{Wood.colors[0].color}
+    span(style="display:block") Durability: #{Wood.durability ? Wood.durability.class : ''}
+    span(style="display:block") Color: #{Wood.colors[0] ? Wood.colors[0].color : ''}
     span(style="display:block") Quantity: #{Wood.quantity}
     span(style="display:block") Price: #{Wood.price} 
+    span(style="display:block") Variety: #{Wood.variety} 
 
     br
     a(href="/") Back

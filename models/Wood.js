@@ -12,7 +12,7 @@ const WoodSchema = new Schema({
    colors: [{type: ObjectId, ref:"Color"}],
    texture: {type: String},
    quantity: {type: Number}, //set: v => v.trunc()
-   price: {type: Number, set: v => v.toFixed(2)},
+   price: {type: Number}, //set: v => v.toFixed(2)},
    variety: {type: String},
    
   // application: {},
@@ -29,5 +29,9 @@ WoodSchema.virtual('url').get(function() {
     return `/woods/${this.name}`;   
 })
 
+
+WoodSchema.virtual('id_url').get(function() {
+    return `/edit/wood/${this.id}`;   
+})
 
 module.exports = mongoose.model("Wood", WoodSchema);

@@ -5,7 +5,7 @@ block content
         
         div.form_sub_container
             div.form_division
-                label(for="name") Name:
+                label(for="name") Name: 
                 input(type="text" placeholder="Oak" name="name" id="name") 
                 span= exist ? exist : ''
 
@@ -18,11 +18,12 @@ block content
                 input(type="text" placeholder="Sturdy and durable" name="description" id="description") 
             
             div.form_division
-                label(for='colors') Colors:
-                select(name='colors')
-                    each color in Colors
-                        option(selected= color._id === colors) #{color.color}
-            
+                span Select colors that apply
+                each color in Colors
+                    div
+                        input(type="checkbox" name="colors" value=color._id id=color.color)
+                        label(for=colors) #{color.color}
+              
             div.form_division
                 label(for='durability') Durability:
                 select(name='durability')
@@ -40,7 +41,7 @@ block content
 
             div.form_division
                 label(for="price") Price: 
-                input(type="number" placeholder="₱ 54.55")
+                input(type="number" placeholder="₱ 54.55" min="0.01" step=".01" name="price")
             
             div.form_division
                 label(for="variety") Variety: 
@@ -49,7 +50,7 @@ block content
             br
             
             div.btn_container
-                button.btn Add New Wood
+                button.btn= Edit ? Edit : 'Add New book'
                 span
                     a(href="/" class="cancel") Cancel
            

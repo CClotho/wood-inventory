@@ -22,7 +22,8 @@ router.get('/woods/category/engineered', woodControllers.getEngineeredWoods);
 
 router.get('/add/wood', woodControllers.addForm);
 router.post('/add/wood', woodControllers.addNewWood);
-router.put('/edit/wood/:id');
+router.get('/edit/wood/:id', woodControllers.editForm);
+router.post('/edit/wood/:id',woodControllers.editWoodById);
 router.delete('/delete/wood/:id');
 
 module.exports = router;
