@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    <form action="/add/wood" method="POST">
+    <form class="form" action="/add/wood" method="POST">
         
         div.form_sub_container
             div.form_division
@@ -28,7 +28,7 @@ block content
                 label(for='durability') Durability:
                 select(name='durability')
                     each durability in Classes
-                        option(selected= durability._id === durability) #{durability.name}
+                        option(value=durability._id.toString() selected= durability._id.toString() === durability._id.toString()) #{durability.name}
 
 
             div.form_division
@@ -37,7 +37,7 @@ block content
             
             div.form_division
                 label(for="quantity") Quantity:
-                input(type="number" placeholder="30")
+                input(type="number" placeholder="30" name="quantity" min="1")
 
             div.form_division
                 label(for="price") Price: 
@@ -45,7 +45,7 @@ block content
             
             div.form_division
                 label(for="variety") Variety: 
-                input(type="text" placeholder="West Oak")
+                input(type="text" placeholder="West Oak" name="variety")
             
             br
             

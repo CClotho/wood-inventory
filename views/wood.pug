@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    h2= exist ? exist : ''
+    h2= exist ? exist : '' || protected ? protected : ''
     h1= Wood.name
     p= Wood.description
     span(style="display:block") Type: #{Wood.type}
@@ -13,4 +13,10 @@ block content
     span(style="display:block") Variety: #{Wood.variety} 
 
     br
+    if deleteWood 
+        <form  action(=`${Wood.del.url}`) method="post">
+        button(class="btn" type="submit")= deleteWood 
+        </form>
+
+        
     a(href="/") Back

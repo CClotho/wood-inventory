@@ -34,4 +34,8 @@ WoodSchema.virtual('id_url').get(function() {
     return `/edit/wood/${this.id}`;   
 })
 
+
+WoodSchema.virtual('del_url').get(function() {
+    return `/delete/wood/${this.id}`;   
+})
 module.exports = mongoose.model("Wood", WoodSchema);

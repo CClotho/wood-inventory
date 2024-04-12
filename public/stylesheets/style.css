@@ -83,10 +83,12 @@ input, select {
   border: 2px solid black;
 }
 
-form {
+.form {
   display: flex;
   justify-content: center;
 }
+
+
 
 .cancel, .edit {
   text-decoration: none;

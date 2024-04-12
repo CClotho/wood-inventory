@@ -34,22 +34,44 @@ exports.getWoodById = asyncHandler(async(req,res,next) => {
 })
 
 exports.getSoftWoods = asyncHandler(async(req,res,next) => {
+    
+    const softwood = await Wood.find({type: 'softwood'});
+
+    if(softwood.length > 0) {
+        res.render("index", {Woods: softwood});
+        return;
+    }
    
-   
-    res.send("get all softwoods");
+    res.render("index", {none: "There are no type of softwood woods in the inventory"})
+
 })
 
 exports.getHardWoods = asyncHandler(async(req,res,next) => {
-    res.send("get all hardwoods");
+    
+    const hardwood = await Wood.find({type: 'hardwood'});
+
+    if(hardwood.length > 0) {
+        res.render("index", {Woods: hardwood});
+        return;
+    }
+   
+    res.render("index", {none: "There are no type of hardwood woods in the inventory"})
 })
 
 exports.getEngineeredWoods = asyncHandler(async(req,res,next) => {
-    res.send("get all engineered woods");
+    const engineered = await Wood.find({type: 'engineered'});
+
+    if(engineered.length > 0) {
+        res.render("index", {Woods: engineered});
+        return;
+    }
+   
+    res.render("index", {none: "There are no type of engineered woods in the inventory"})
 })
 
 exports.addNewWood = asyncHandler(async(req, res, next) => {
     
-    const {name, type, description, colors, durability, quantity, price, variety} = req.body;
+    const {name, type, description, colors, durability, quantity, price, variety, texture} = req.body;
     // add check here convert user's input to lowercase
     console.log("value of colors in add form", colors)
     const checkWood = await Wood.findOne({name:name})
@@ -63,14 +85,26 @@ exports.addNewWood = asyncHandler(async(req, res, next) => {
     if(checkWood) {res.render('wood', {exist:"Wood exist in inventory", Wood: checkWood })}
     // then other checking condition such as if durability or color data is available in the 2 models
     
-    
+    const newWood = await new Wood({
+        name: name,
+        type: type,
+        description:description ? description : null,
+        colors: colors ? colors : null, 
+        durability: durability ? durability : null,
+        quantity: quantity ? quantity: null,
+        price: price ? price : null, 
+        texture: texture ? texture: null,
+        variety: variety ? variety : null,
+    })
+    await newWood.save();
+    res.redirect("/");
 })
 
 exports.addForm = asyncHandler(async(req,res,next)=> {
    
     const getColors = await Color.find();
     const getDurability = await Durability.find();
-
+    console.log(getDurability)
 
     res.render('add-form', {Colors: getColors, Classes:getDurability})
 })
@@ -84,7 +118,7 @@ exports.editForm = asyncHandler(async(req,res,next)=> {
 })
 
 exports.editWoodById = asyncHandler(async(req,res,next) => {
-    const {name, type, description, colors, durability, quantity, price, variety} = req.body;
+    const {name, type, description, colors, durability, quantity, price, variety,texture} = req.body;
     console.log(colors)
     console.log(price)
     const editWood = await Wood.findOne({_id: req.params.id})
@@ -105,12 +139,13 @@ exports.editWoodById = asyncHandler(async(req,res,next) => {
             _id: req.params.id,
             name: name,
             type: type,
-            description: description,
-            colors: colors,
-            durability: durability,
-            quantity: quantity,
-            price: price,
-            variety: variety ? variety : ''
+            description:description ? description : null,
+            colors: colors ? colors : null, 
+            durability: durability ? durability : null,
+            quantity: quantity ? quantity: null,
+            price: price ? price : null, 
+            texture: texture ? texture: null,
+            variety: variety ? variety : null,
         })
    
 
@@ -124,6 +159,23 @@ exports.editWoodById = asyncHandler(async(req,res,next) => {
     res.redirect(updatedData.url);
 })
 
+exports.deleteForm = asyncHandler(async(req,res,next )=> {
+    const findWood = await Wood.findOne({_id: req.params.id})
+    
+    res.render("wood", {deleteWood: 'Delete', Wood:findWood} )
+})
+
+
 exports.deleteWoodById = asyncHandler(async(req,res,next)=> {
-    res.send("delete wood by id");
+    
+    const findWood = await Wood.findOne({_id: req.params.id})
+
+    if(findWood.quantity > 0) {
+        return res.render("wood", {protected: "Item cannot be deleted if there is still a stock of it", Wood:findWood})
+    }
+    
+    const deleteWood = await Wood.findByIdAndDelete(req.params.id);
+
+    res.redirect('/');
+   
 })

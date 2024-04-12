@@ -6,21 +6,24 @@ block content
 
     
   div.container
-    <form  action="woods/category/softwood" method="get">
-      button.btn(type="submit") Softwoods 
-    </form>
 
-    <form action="woods/category/hardwood" method="get">
-      button.btn(type="submit") Hardwoods 
-    </form>
+    button.btn
+      a(href="/") All
+
+    button.btn
+      a(href="/woods/category/softwood") Softwood
+
+    button.btn
+      a(href="/woods/category/hardwood") Hardwood
     
-    <form action="woods/category/engineered" method="get">
-      button.btn(type="submit") Engineered
-    </form>
+    button.btn
+      a(href="/woods/category/engineered") Engineered
+
   </div>
   
     br
     
+
 
     table(style='width:100%', border='1')
         tr
@@ -35,21 +38,24 @@ block content
             th Edit
             th Delete
         tbody
-        each wood in Woods
-          tr
-            td 
-              a(href=`${wood.url}`) #{wood.name}
-            td #{wood.type}
-            td #{wood.description}
-            td #{wood.texture}
-            td #{wood.colors[0] ? wood.colors[0].color: ''}
-            td #{wood.durability ? wood.durability.class : ''} 
-            td #{wood.quantity}
-            td ₱#{Number.isInteger(wood.price) ? `${wood.price}.00` : wood.price}
-            td
-              a(href=`${wood.id_url}`) Edit
-            td
-              a(href=`${wood.id_url}`) Delete
+        if Woods && Woods.length > 0
+          each wood in Woods
+            tr
+              td 
+                a(href=`${wood.url}`) #{wood.name}
+              td #{wood.type}
+              td #{wood.description}
+              td #{wood.texture}
+              td #{wood.colors[0] ? wood.colors[0].color: ''}
+              td #{wood.durability ? wood.durability.class : ''} 
+              td #{wood.quantity}
+              td ₱#{Number.isInteger(wood.price) ? `${wood.price}.00` : wood.price}
+              td
+                a(href=`${wood.id_url}`) Edit
+              td
+                a(href=`${wood.del_url}`) Delete
+        else 
+          h1= none ? none : ''
     br
     a(href="/add/wood") Add New Wood
   script.
