@@ -168,14 +168,24 @@ exports.deleteForm = asyncHandler(async(req,res,next )=> {
 
 exports.deleteWoodById = asyncHandler(async(req,res,next)=> {
     
+    const {password} = req.body;
     const findWood = await Wood.findOne({_id: req.params.id})
 
-    if(findWood.quantity > 0) {
-        return res.render("wood", {protected: "Item cannot be deleted if there is still a stock of it", Wood:findWood})
-    }
-    
+    if(password === "Superflous") {
+
+        if(findWood.quantity > 0) {
+            res.render("wood", {protected: "Item cannot be deleted if there is still a stock of it", Wood:findWood})
+            return;
+        }
+
     const deleteWood = await Wood.findByIdAndDelete(req.params.id);
 
+    
+    }
+    else {
+        res.render("wood", {protected: "Incorrect Password: Item cannot be deleted", Wood:findWood}) 
+    }
+   
     res.redirect('/');
    
 })

@@ -14,9 +14,12 @@ block content
 
     br
     if deleteWood 
-        <form  action(=`${Wood.del.url}`) method="post">
-        button(class="btn" type="submit")= deleteWood 
+        <form  action(=`${Wood.del.url}`) style="max-width: 150px;" method="post">
+            div.form_division
+                label(for="password") password:
+                input(type="text" name="password")
+                button(class="btn" type="submit")= deleteWood 
         </form>
 
-        
+    br
     a(href="/") Back
