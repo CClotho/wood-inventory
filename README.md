@@ -15,6 +15,6 @@ Edit an Item
 
 
 
-Delete an Item *Note: deleting an item requires the password*
+Delete an Item *Note: deleting an item requires a password*
 
 ![Delete an Item](public/images/delete%20an%20item.png)
