@@ -1,11 +1,11 @@
 Home
-![Homepage](public/images/wood%20homepage.png);
+![Homepage](public/images/wood%20homepage.png)
 
 
 
 Add New Item
 
-![Add New Item](public/images/add%20new%20wood.png);
+![Add New Item](public/images/add%20new%20wood.png)
 
 
 
