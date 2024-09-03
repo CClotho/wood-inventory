@@ -1,11 +1,32 @@
 const Wood = require('../models/Wood')
 const Durability = require('../models/WoodDurabilityClasses');
 const Color = require('../models/Color');
-
+const { uploadImage, getAssetInfo, createImageTag } = require('./cloud');
 const asyncHandler = require("express-async-handler");
+const Image = require('../models/Image');
 
+exports.Gallery = asyncHandler(async(req, res , next)=> {
+    const Images = await Image.find();
 
+    res.render('gallery', {Photos: Images});
+})
 
+exports.getPhotoForm = asyncHandler(async(req, res , next)=> {
+    res.render('upload-photo')
+})
+
+exports.handleUpload = asyncHandler(async(req,res,next)=> {
+    console.log("This is the result after getting processed by multer ", req.file);
+    const uploaded = await uploadImage(req.file.path);
+    console.log("After uploading in cloudinary", uploaded);
+/* 
+    const Photo = new Image({ // save the url from the cloudinary service database
+        url: uploaded.url
+    })
+    
+    await Photo.save(); */
+    res.redirect('/gallery')
+})
 
 exports.getWoods = asyncHandler(async(req,res,next) => {
    
@@ -186,6 +207,6 @@ exports.deleteWoodById = asyncHandler(async(req,res,next)=> {
         res.render("wood", {protected: "Incorrect Password: Item cannot be deleted", Wood:findWood}) 
     }
    
-    res.redirect('/');
+    //res.redirect('/');
    
 })

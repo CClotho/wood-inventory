@@ -4,20 +4,22 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-const {addNewWood} = require('./testFolder/test')
+config = require('./lib/configuration');
 
-const MONGODB_URI = 'mongodb+srv://admin:admintest@cluster0.blewklo.mongodb.net/inventory';
+
+//const MONGODB_URI = 'mongodb+srv://admin:admintest@cluster0.blewklo.mongodb.net/inventory';
 
 mongoose.set("strictQuery", false);
 
 const main = async () => {
-  await mongoose.connect(MONGODB_URI);
+  await mongoose.connect(config.get("MONGODB:URI"));
   
 }
 
+console.log(config.get("NODE:ENV"));
+
 main().catch((err) => console.log(err), console.log("connected")) 
 
-//addNewWood();
 
 
 var indexRouter = require('./routes/index');
@@ -33,6 +35,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use(function(req,res, next) {
   app.locals.title = "Woods Inventory"

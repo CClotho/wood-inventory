@@ -1,0 +1,9 @@
+extends layout
+
+block content
+
+    h1= title
+    if Photos && Photos.length > 0 
+        each photo in Photos 
+            div
+                img(src=photo.url alt="snail")

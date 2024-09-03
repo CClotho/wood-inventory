@@ -1,0 +1,5 @@
+{
+    "MONGODB": {
+      "URI": "mongodb+srv://admin:admintest@cluster0.blewklo.mongodb.net/inventory"
+    }
+}

@@ -14,6 +14,7 @@ const WoodSchema = new Schema({
    quantity: {type: Number}, //set: v => v.trunc()
    price: {type: Number}, //set: v => v.toFixed(2)},
    variety: {type: String},
+   photo_url: {type: String},
    
   // application: {},
 },
